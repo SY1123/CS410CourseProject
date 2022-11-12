@@ -22,7 +22,7 @@ class Music(object):
         self.document_path = documents_path
 
     def load_data(self):
-        csv_reader = csv.reader(open("./data.csv"))
+        csv_reader = csv.reader(open(self.document_path, encoding='utf-8'))
         for line in csv_reader:
             detail = MusicDetail()
             detail.title = line[2]
@@ -32,18 +32,16 @@ class Music(object):
             detail.spotify_id = line[12]
             # detail.genre = [line[]]
             detail.date = line[0]
-            self.music_set.append(MusicDetail)
+            self.music_set.append(detail)
+            print(detail)
         # Update self.number_of_documents
         self.total_num = len(self.music_set)
 
     def sentiment_search(self, sentiment):
-
         pass
 
 
-
-
-def main():
+if __name__ == '__main__':
     document_path = './billboard_2000_2018_spotify_lyrics.csv'
     musicCorpus = Music(document_path)
     musicCorpus.load_data()
