@@ -4,7 +4,7 @@ import math
 import numpy as np
 from rank_bm25 import BM25Okapi
 
-df = pd.read_csv("originSongs.csv", encoding='unicode_escape',sep=",")
+df = pd.read_csv("songs_sentiment.csv", encoding='unicode_escape', sep=",")
 ll = df['lyrics'].to_list()
 cleanedList = [x for x in ll if x != 'NaN']
 cleanedList
