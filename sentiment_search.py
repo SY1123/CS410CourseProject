@@ -42,10 +42,10 @@ class Music(object):
             # detail.genre = [line[]]
             detail.date = line[1]
             detail.sentiment = line[-1]
-            print(line[-2])
+            # print(line[-2])
             detail.compound = float(line[-2])
             self.music_set.append(detail)
-            print(detail)
+            # print(detail)
         # Update self.number_of_documents
         self.total_num = len(self.music_set)
 
@@ -58,12 +58,12 @@ class Music(object):
         res = []
         for t in range(10):
             res.append(self.music_set[heapq.heappop(q)[1]])
-            print(self.music_set[heapq.heappop(q)[1]].title)
+            # print(self.music_set[heapq.heappop(q)[1]].title)
+        return res
 
-
-if __name__ == '__main__':
-    document_path = 'songs_sentiment.csv'
-
-    musicCorpus = Music(document_path)
-    musicCorpus.load_data()
-    musicCorpus.sentiment_search("happy")
+# if __name__ == '__main__':
+#     document_path = 'songs_sentiment.csv'
+#
+#     musicCorpus = Music(document_path)
+#     musicCorpus.load_data()
+#     musicCorpus.sentiment_search("happy")
