@@ -48,9 +48,13 @@ def output():
 @app.route('/sentiment_search')
 def sentiment_search():
     keyword = request.args.get("keyword")
+    if len(keyword) == 0:
+        return "error, input is invalid"
     res = musicCorpus.sentiment_search(keyword)
     resp = []
     for t in res:
+        if t is None:
+            continue
         resp.append(jsonpickle.encode(t))
     return jsonpickle.encode(resp)
 
