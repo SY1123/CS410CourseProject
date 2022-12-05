@@ -3,7 +3,8 @@ import re
 import math
 import numpy as np
 from rank_bm25 import BM25Okapi
-
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
 # df = pd.read_csv("songs_sentiment.csv", encoding='unicode_escape', sep=",")
 # ll = df['lyrics'].to_list()
 # cleanedList = [x for x in ll if x != 'NaN']
@@ -114,7 +115,7 @@ def computeTFIDF(tfBagOfWords, idfs):
 def query_BOW(input):
     delimi = ",.!?/&-:;@'..."
     re.split("["+"\\".join(delimi)+"]", input)
-    input = ' '.join(w for w in re.split(r"\W", input) if w)
+    input = ' '.join(lemmatizer.lemmatize(w) for w in re.split(r"\W", input) if w)
     return(input.split())
 
 def query_num(input, allkey):
@@ -153,7 +154,7 @@ def query_computeIDF(documents):
 
 
 import math
-def cosine_similarity(query, datas,query_tf):
+def self_cosine_similarity(query, datas,query_tf):
     result = []
     for data in datas:
         numerator  = 0
@@ -176,7 +177,7 @@ def cosine_similarity(query, datas,query_tf):
 
 
 
-def bm25_index(All_doc, query):
+def bm25_rank(All_doc, query):
     
     #second choice use the bm25
     tokenized_corpus = [doc.split(" ") for doc in All_doc]
