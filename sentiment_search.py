@@ -11,18 +11,15 @@ nltk.download('punkt')
 
 class MusicDetail(object):
     def __init__(self):
-        self.id = ""
         self.title = ""
         self.lyric = ""
         self.artist = ""
         self.spotify_link = ""
         self.spotify_id = ""
         self.genre = []
-        self.album = ""
-        self.release = ""
+        self.release_date = ""
         self.sentiment = ""
         self.compound = 0.0
-        self.date = datetime.date.today()
 
 
 class Music(object):
@@ -41,8 +38,8 @@ class Music(object):
             detail.artist = line[5]
             detail.spotify_link = line[12]
             detail.spotify_id = line[13]
-            detail.genre = line[14]
-            # detail.album =
+            detail.genre = line[15]
+            #detail.album =
             detail.release_date = line[1]
             detail.sentiment = line[-1]
             # print(line[-2])
