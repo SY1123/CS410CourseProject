@@ -9,6 +9,7 @@ import numpy as np
 from rank_bm25 import BM25Okapi
 #from prefit_search import*
 from NLPSearch import*
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk.data
 
 import sentiment_search as ss
