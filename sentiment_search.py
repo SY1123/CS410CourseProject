@@ -7,6 +7,8 @@ import heapq
 
 nltk.download('vader_lexicon')
 nltk.download('punkt')
+nltk.download('omw-1.4')
+nltk.download('wordnet')
 
 
 class MusicDetail(object):
