@@ -31,6 +31,8 @@ for i in range(0,len(All_doc)):
     # print(All_doc[i].split())
     All_bagofwords.append(All_doc[i].split())
     
+musicCorpus = ss.Music("songs_sentiment.csv")
+musicCorpus.load_data()
 
 class MusicDetail(object):
     def __init__(self):
