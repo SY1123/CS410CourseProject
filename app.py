@@ -7,8 +7,9 @@ import re
 import math
 import numpy as np
 from rank_bm25 import BM25Okapi
-from prefit_search import*
+#from prefit_search import*
 from NLPSearch import*
+import nltk.data
 
 import sentiment_search as ss
 
@@ -34,6 +35,8 @@ for i in range(0,len(All_doc)):
 musicCorpus = ss.Music("songs_sentiment.csv")
 musicCorpus.load_data()
 
+nltk.download('omw-1.4')
+nltk.download('wordnet')
 # @app.route('/')
 # def index():
 #
