@@ -40,7 +40,7 @@ class Music(object):
             detail.artist = line[5]
             detail.spotify_link = line[12]
             detail.spotify_id = line[13]
-            detail.genre = line[15]
+            detail.genre = line[16]
             #detail.album =
             detail.release_date = line[1]
             detail.sentiment = line[-1]
@@ -58,7 +58,7 @@ class Music(object):
         q = [(abs(compound - x.compound), i) for i, x in enumerate(self.music_set)]
         heapq.heapify(q)
         res = []
-        for t in range(10):
+        for t in range(6):
             res.append(self.music_set[heapq.heappop(q)[1]])
             # print(self.music_set[heapq.heappop(q)[1]].title)
         return res
