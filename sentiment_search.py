@@ -41,8 +41,9 @@ class Music(object):
             detail.artist = line[5]
             detail.spotify_link = line[12]
             detail.spotify_id = line[13]
-            # detail.genre = [line[]]
-            detail.date = line[1]
+            detail.genre = line[14]
+            # detail.album =
+            detail.release_date = line[1]
             detail.sentiment = line[-1]
             # print(line[-2])
             detail.compound = float(line[-2])
