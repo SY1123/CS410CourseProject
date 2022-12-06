@@ -2,6 +2,7 @@ import json
 from nltk.stem import WordNetLemmatizer
 import jsonpickle as jsonpickle
 from flask import Flask, render_template, send_file, request
+from flask_cors import CORS
 import pandas as pd
 import re
 import math
@@ -15,6 +16,7 @@ import nltk.data
 import sentiment_search as ss
 
 app = Flask(__name__)
+CORS(app)
 lemmatizer = WordNetLemmatizer()
 df = pd.read_csv("songs.csv", encoding='unicode_escape',sep=",")
 
