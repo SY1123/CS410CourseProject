@@ -17,7 +17,9 @@ class MusicDetail(object):
         self.artist = ""
         self.spotify_link = ""
         self.spotify_id = ""
-        # self.genre = []
+        self.genre = []
+        self.album = ""
+        self.release = ""
         self.sentiment = ""
         self.compound = 0.0
         self.date = datetime.date.today()
