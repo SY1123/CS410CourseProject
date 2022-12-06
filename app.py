@@ -32,10 +32,18 @@ for i in range(0,len(All_doc)):
     All_bagofwords.append(All_doc[i].split())
     
 
-# @app.route('/')
-# def index():
-#     
-#     return 200
+class MusicDetail(object):
+    def __init__(self):
+        self.id = ""
+        self.title = ""
+        self.lyric = ""
+        self.artist = ""
+        self.spotify_link = ""
+        self.spotify_id = ""
+        # self.genre = []
+        self.sentiment = ""
+        self.compound = 0.0
+        self.date = datetime.date.today()
 
 
 
