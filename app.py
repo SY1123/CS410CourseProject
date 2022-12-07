@@ -9,7 +9,7 @@ import datetime
 import numpy as np
 from rank_bm25 import BM25Okapi
 
-#from prefit_search import*
+from prefit_search import*
 from NLPSearch import*
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import sentiment_search as ss
@@ -41,10 +41,29 @@ musicCorpus.load_data()
 
 nltk.download('omw-1.4')
 nltk.download('wordnet')
-# @app.route('/')
-# def index():
-#     
-#     return 200
+
+userRecords = ""
+
+
+@app.route('/')
+def index():
+    global userRecords
+    if len(userRecords) == 0:
+        return jsonpickle.encode({"[]"})
+    index = prefit_rank(userRecords,5)
+    send = []
+    for t in index:
+        genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
+        curr = {
+            "title" : df_.iloc[t][2],
+            "release_date":df_.iloc[t][1],
+            "artist" : genre,
+            "genre": df_.iloc[t][14],
+            "spotify_link" : df_.iloc[t][11],
+            "lyric": df_.iloc[t][30]
+        }
+        send.append(curr)
+    return jsonpickle.encode(send),200
 
 
 
@@ -57,10 +76,13 @@ def bm25():
 #http://127.0.0.1:5000/prefit_qsearch?keyword=They-re-rotting-my-brain
 @app.route('/prefit_qsearch')
 def prefit_qsearch():
+    global userRecords
     keyword = request.args.get("keyword")
     query = keyword
     query = query.replace('-', ' ')
     query = query.lower()
+    userRecords += " "
+    userRecords += query
     index = prefit_rank(query,5)
     send = []
     for t in index:
@@ -78,6 +100,7 @@ def prefit_qsearch():
 
 @app.route('/self_cosinesim')
 def self_cosinesim():
+    global userRecords
     keyword = request.args.get("keyword")
     MAP = fetchInMap(All_bagofwords)
     allkey = mergeKey(MAP)
@@ -92,6 +115,8 @@ def self_cosinesim():
 
     query = keyword
     query = query.lower()
+    userRecords += " "
+    userRecords += query
     query_bow = query_BOW(query)
     query_fr = query_num(query_bow,allkey)
     query_tf = query_computeTF(query_fr,query_bow)
