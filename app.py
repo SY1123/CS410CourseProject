@@ -64,16 +64,17 @@ def prefit_qsearch():
     index = prefit_rank(query,5)
     send = []
     for t in index:
+        genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":df_.iloc[t][1],
-            "artist" : df_.iloc[t][4],
+            "artist" : genre,
             "genre": df_.iloc[t][14],
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
         }
         send.append(curr)
-    return jsonpickle.encode(send)
+    return jsonpickle.encode(send),200
 
 @app.route('/self_cosinesim')
 def self_cosinesim():
@@ -100,16 +101,17 @@ def self_cosinesim():
     index = np.argsort(query_rank)[-5:]
     send = []
     for t in index:
+        genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":df_.iloc[t][1],
             "artist" : df_.iloc[t][4],
-            "genre": df_.iloc[t][14],
+            "genre": genre,
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
         }
         send.append(curr)
-    return send, 200
+    return jsonpickle.encode(send), 200
 
 
 # use: 127.0.0.1：5000/sentiment_search？keyword=xxx
