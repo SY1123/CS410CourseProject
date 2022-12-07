@@ -40,7 +40,7 @@ class Music(object):
             detail.artist = line[5]
             detail.spotify_link = line[12]
             detail.spotify_id = line[13]
-            detail.genre = line[15].split("'")[1::2]
+            detail.genre = ", ".join(line[15].split("'")[1::2])
             #detail.album =
             detail.release_date = line[1]
             detail.sentiment = line[36]
