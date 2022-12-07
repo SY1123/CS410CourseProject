@@ -9,7 +9,7 @@ import datetime
 import numpy as np
 from rank_bm25 import BM25Okapi
 
-from prefit_search import*
+#from prefit_search import*
 from NLPSearch import*
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import sentiment_search as ss
@@ -52,7 +52,7 @@ nltk.download('wordnet')
 @app.route('/bm25_lyrics')
 def bm25():
     keyword = request.args.get("keyword")
-    return bm25_rank(All_doc, keyword),200
+    return jsonpickle.encode(bm25_rank(All_doc, keyword))
 
 #http://127.0.0.1:5000/prefit_qsearch?keyword=They-re-rotting-my-brain
 @app.route('/prefit_qsearch')
@@ -66,13 +66,14 @@ def prefit_qsearch():
     for t in index:
         curr = {
             "title" : df_.iloc[t][2],
+            "release_date":df_.iloc[t][1],
             "artist" : df_.iloc[t][4],
             "genre": df_.iloc[t][14],
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
         }
         send.append(curr)
-    return send, 200
+    return jsonpickle.encode(send)
 
 @app.route('/self_cosinesim')
 def self_cosinesim():
@@ -101,13 +102,14 @@ def self_cosinesim():
     for t in index:
         curr = {
             "title" : df_.iloc[t][2],
+            "release_date":df_.iloc[t][1],
             "artist" : df_.iloc[t][4],
             "genre": df_.iloc[t][14],
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
         }
         send.append(curr)
-    return jsonpickle.encode(send), 200
+    return send, 200
 
 
 # use: 127.0.0.1：5000/sentiment_search？keyword=xxx
