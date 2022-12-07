@@ -4,11 +4,12 @@ import jsonpickle as jsonpickle
 from flask import Flask, render_template, send_file, request
 import pandas as pd
 import re
-import math
+import datetime
 import numpy as np
 from rank_bm25 import BM25Okapi
 from prefit_search import*
 from NLPSearch import*
+from sentiment_search import*
 
 import sentiment_search as ss
 
@@ -34,19 +35,6 @@ for i in range(0,len(All_doc)):
 musicCorpus = ss.Music("songs_sentiment.csv")
 musicCorpus.load_data()
 
-class MusicDetail(object):
-    def __init__(self):
-        self.id = ""
-        self.title = ""
-        self.lyric = ""
-        self.artist = ""
-        self.spotify_link = ""
-        self.spotify_id = ""
-        # self.genre = []
-        self.sentiment = ""
-        self.compound = 0.0
-        self.date = datetime.date.today()
-
 
 
 #http://127.0.0.1:5000/bm25_lyrics?keyword=They-re-rotting-my-brain
@@ -63,11 +51,17 @@ def prefit_qsearch():
     query = query.replace('-', ' ')
     query = query.lower()
     index = prefit_rank(query,5)
-    resp = []
+    send = []
     for t in index:
-        resp.append(jsonpickle.encode(df_.iloc[t]))
-    return jsonpickle.encode(resp), 200
-
+        curr = {
+            "title" : df_.iloc[t][2],
+            "artist" : df_.iloc[t][4],
+            "genre": df_.iloc[t][14],
+            "spotify_link" : df_.iloc[t][11],
+            "lyric": df_.iloc[t][30]
+        }
+        send.append(curr)
+    return send, 200
 
 @app.route('/self_cosinesim')
 def self_cosinesim():
@@ -92,11 +86,17 @@ def self_cosinesim():
     
     
     index = np.argsort(query_rank)[-5:]
-    resp = []
+    send = []
     for t in index:
-            resp.append(jsonpickle.encode(df_.iloc[t]))
-    resp = list(reversed(resp))
-    return jsonpickle.encode(resp), 200
+        curr = {
+            "title" : df_.iloc[t][2],
+            "artist" : df_.iloc[t][4],
+            "genre": df_.iloc[t][14],
+            "spotify_link" : df_.iloc[t][11],
+            "lyric": df_.iloc[t][30]
+        }
+        send.append(curr)
+    return send, 200
 
 
 # use: 127.0.0.1：5000/sentiment_search？keyword=xxx
