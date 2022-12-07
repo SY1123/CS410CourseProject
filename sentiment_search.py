@@ -7,20 +7,21 @@ import heapq
 
 nltk.download('vader_lexicon')
 nltk.download('punkt')
+nltk.download('omw-1.4')
+nltk.download('wordnet')
 
 
 class MusicDetail(object):
     def __init__(self):
-        self.id = ""
         self.title = ""
         self.lyric = ""
         self.artist = ""
         self.spotify_link = ""
         self.spotify_id = ""
-        # self.genre = []
+        self.genre = []
+        self.release_date = ""
         self.sentiment = ""
         self.compound = 0.0
-        self.date = datetime.date.today()
 
 
 class Music(object):
@@ -39,8 +40,9 @@ class Music(object):
             detail.artist = line[5]
             detail.spotify_link = line[12]
             detail.spotify_id = line[13]
-            # detail.genre = [line[]]
-            detail.date = line[1]
+            detail.genre = line[16]
+            #detail.album =
+            detail.release_date = line[1]
             detail.sentiment = line[-1]
             # print(line[-2])
             detail.compound = float(line[-2])
@@ -56,7 +58,7 @@ class Music(object):
         q = [(abs(compound - x.compound), i) for i, x in enumerate(self.music_set)]
         heapq.heapify(q)
         res = []
-        for t in range(10):
+        for t in range(6):
             res.append(self.music_set[heapq.heappop(q)[1]])
             # print(self.music_set[heapq.heappop(q)[1]].title)
         return res

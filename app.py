@@ -2,6 +2,7 @@ import json
 from nltk.stem import WordNetLemmatizer
 import jsonpickle as jsonpickle
 from flask import Flask, render_template, send_file, request
+from flask_cors import CORS
 import pandas as pd
 import re
 import datetime
@@ -9,11 +10,11 @@ import numpy as np
 from rank_bm25 import BM25Okapi
 from prefit_search import*
 from NLPSearch import*
-from sentiment_search import*
-
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import sentiment_search as ss
 
 app = Flask(__name__)
+CORS(app)
 lemmatizer = WordNetLemmatizer()
 df = pd.read_csv("songs.csv", encoding='unicode_escape',sep=",")
 
@@ -34,6 +35,14 @@ for i in range(0,len(All_doc)):
     
 musicCorpus = ss.Music("songs_sentiment.csv")
 musicCorpus.load_data()
+
+
+nltk.download('omw-1.4')
+nltk.download('wordnet')
+# @app.route('/')
+# def index():
+#     
+#     return 200
 
 
 
@@ -76,15 +85,15 @@ def self_cosinesim():
     tfidf = []
     for i in range(0, len(TF)):
         tfidf.append(computeTFIDF(TF[i],idf))
-        
+
     query = keyword
     query = query.lower()
     query_bow = query_BOW(query)
     query_fr = query_num(query_bow,allkey)
     query_tf = query_computeTF(query_fr,query_bow)
     query_rank = self_cosine_similarity(query_tf,tfidf,query_tf)
-    
-    
+
+
     index = np.argsort(query_rank)[-5:]
     send = []
     for t in index:
@@ -110,7 +119,7 @@ def sentiment_search():
     for t in res:
         if t is None:
             continue
-        resp.append(jsonpickle.encode(t))
+        resp.append(t)
     return jsonpickle.encode(resp)
 
 
