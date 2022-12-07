@@ -8,10 +8,12 @@ import re
 import datetime
 import numpy as np
 from rank_bm25 import BM25Okapi
+
 from prefit_search import*
 from NLPSearch import*
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import sentiment_search as ss
+import nltk.data
 
 app = Flask(__name__)
 CORS(app)

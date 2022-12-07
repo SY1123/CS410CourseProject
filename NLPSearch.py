@@ -190,6 +190,6 @@ def bm25_rank(All_doc, query):
     # array([0.        , 0.93729472, 0.        ])
 
     #this will directly give the lyrics
-    return(bm25.get_top_n(tokenized_query, All_doc, n=1))
+    return(bm25.get_top_n(tokenized_query, All_doc, n=5))
 
 # print("bm25",bm25_index(All_doc,"They-are-rotting-my-brain"))
