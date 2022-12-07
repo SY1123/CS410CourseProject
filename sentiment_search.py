@@ -40,12 +40,12 @@ class Music(object):
             detail.artist = line[5]
             detail.spotify_link = line[12]
             detail.spotify_id = line[13]
-            detail.genre = line[16]
+            detail.genre = line[15].split("'")[1::2]
             #detail.album =
             detail.release_date = line[1]
-            detail.sentiment = line[-1]
+            detail.sentiment = line[36]
             # print(line[-2])
-            detail.compound = float(line[-2])
+            detail.compound = float(line[35])
             self.music_set.append(detail)
             # print(detail)
         # Update self.number_of_documents
