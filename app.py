@@ -107,7 +107,7 @@ def self_cosinesim():
             "lyric": df_.iloc[t][30]
         }
         send.append(curr)
-    return send, 200
+    return jsonpickle.encode(send), 200
 
 
 # use: 127.0.0.1：5000/sentiment_search？keyword=xxx
