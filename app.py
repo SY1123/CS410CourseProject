@@ -67,12 +67,15 @@ def index():
     for t in index:
         genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
         release_date = "Unknown"
+        artist = "Unknown"
         if str(df_.iloc[t][1]) != "nan":
             release_date = str(df_.iloc[t][1])
+        if str(df_.iloc[t][5]) != "nan":
+            artist = str(df_.iloc[t][5])
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":release_date,
-            "artist" : df_.iloc[t][5],
+            "artist" : artist,
             "genre": genre,
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
@@ -116,13 +119,16 @@ def prefit_qsearch():
     for t in index:
         genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
         release_date = "Unknown"
+        artist = "Unknown"
         if str(df_.iloc[t][1]) != "nan":
             release_date = str(df_.iloc[t][1])
+        if str(df_.iloc[t][5]) != "nan":
+            artist = str(df_.iloc[t][5])
         print("release_date",release_date)
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":release_date,
-            "artist" : df_.iloc[t][5],
+            "artist" : artist,
             "genre": genre,
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
@@ -161,12 +167,15 @@ def self_cosinesim():
     for t in index:
         genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
         release_date = "Unknown"
+        artist = "Unknown"
         if str(df_.iloc[t][1]) != "nan":
             release_date = str(df_.iloc[t][1])
+        if str(df_.iloc[t][5]) != "nan":
+            artist = str(df_.iloc[t][5])
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":release_date,
-            "artist" : df_.iloc[t][5],
+            "artist" : artist,
             "genre": genre,
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
