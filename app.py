@@ -69,8 +69,8 @@ def index():
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":df_.iloc[t][1],
-            "artist" : genre,
-            "genre": df_.iloc[t][14],
+            "artist" : df_.iloc[t][5],
+            "genre": genre,
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
         }
@@ -102,8 +102,8 @@ def prefit_qsearch():
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":df_.iloc[t][1],
-            "artist" : genre,
-            "genre": df_.iloc[t][14],
+            "artist" : df_.iloc[t][4],
+            "genre": genre,
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
         }
