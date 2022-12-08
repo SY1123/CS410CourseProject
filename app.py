@@ -5,7 +5,6 @@ from flask import Flask, render_template, send_file, request
 from flask_cors import CORS
 import pandas as pd
 import re
-import datetime
 import numpy as np
 from rank_bm25 import BM25Okapi
 
@@ -14,6 +13,13 @@ from NLPSearch import*
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import sentiment_search as ss
 import nltk.data
+import nltk
+import re
+from nltk.corpus import stopwords
+
+from nltk.tokenize import word_tokenize
+
+
 
 app = Flask(__name__)
 CORS(app)
@@ -38,7 +44,7 @@ for i in range(0,len(All_doc)):
 musicCorpus = ss.Music("songs_sentiment.csv")
 musicCorpus.load_data()
 
-
+nltk.download('stopwords')
 nltk.download('omw-1.4')
 nltk.download('wordnet')
 
@@ -50,7 +56,13 @@ def index():
     global userRecords
     if len(userRecords) == 0:
         return jsonpickle.encode({"[]"})
-    index = prefit_rank(userRecords,5)
+    print("userRecords",userRecords)
+    userRecords =  ' '.join(w for w in re.split(r"\W", userRecords) if w)
+    text_tokens = word_tokenize(userRecords)
+    tokens_without_sw = [word for word in text_tokens if not word in stopwords.words()]
+    query = ' '.join(tokens_without_sw)
+    print("testindex",query)
+    index = prefit_rank(query,5)
     send = []
     for t in index:
         genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
