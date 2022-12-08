@@ -5,6 +5,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
+#clean data
 datarame = pd.read_csv("songs.csv", encoding='unicode_escape',sep=",")
 datarame_ = datarame[datarame.lyrics != 'Error: Could not find lyrics.']
 datarame_ = datarame_[datarame_['lyrics'].notna()]

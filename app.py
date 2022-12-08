@@ -7,8 +7,8 @@ import pandas as pd
 import re
 import numpy as np
 from rank_bm25 import BM25Okapi
-
-from prefit_search import*
+from recom_song import*
+# from prefit_search import*
 from NLPSearch import*
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import sentiment_search as ss
@@ -81,12 +81,25 @@ def index():
     return jsonpickle.encode(send),200
 
 
+#http://127.0.0.1:5000/KNNrecom?keyword=They-re-rotting-my-brain
+@app.route('/KNNrecom')
+def KNNrecom():
+    keyword = request.args.get("keyword")
+    query = keyword
+    query = query.replace('-', ' ')
+    query = query.lower()
+    title = KNNrecommender(query,5)
+    return jsonpickle.encode(title)
 
 #http://127.0.0.1:5000/bm25_lyrics?keyword=They-re-rotting-my-brain
 @app.route('/bm25_lyrics')
 def bm25():
     keyword = request.args.get("keyword")
-    return jsonpickle.encode(bm25_rank(All_doc, keyword))
+    query = keyword
+    query = query.replace('-', ' ')
+    query = query.lower()
+    return jsonpickle.encode(bm25_rank(All_doc, query))
+
 
 #http://127.0.0.1:5000/prefit_qsearch?keyword=They-re-rotting-my-brain
 @app.route('/prefit_qsearch')
@@ -116,6 +129,7 @@ def prefit_qsearch():
         }
         send.append(curr)
     return jsonpickle.encode(send),200
+
 
 @app.route('/self_cosinesim')
 def self_cosinesim():
