@@ -66,9 +66,12 @@ def index():
     send = []
     for t in index:
         genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
+        release_date = "Unknown"
+        if str(df_.iloc[t][1]) != "nan":
+            release_date = df_.iloc[t][1]
         curr = {
             "title" : df_.iloc[t][2],
-            "release_date":df_.iloc[t][1],
+            "release_date":release_date,
             "artist" : df_.iloc[t][5],
             "genre": genre,
             "spotify_link" : df_.iloc[t][11],
@@ -99,10 +102,13 @@ def prefit_qsearch():
     send = []
     for t in index:
         genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
+        release_date = "Unknown"
+        if str(df_.iloc[t][1]) != "nan":
+            release_date = df_.iloc[t][1]
         curr = {
             "title" : df_.iloc[t][2],
-            "release_date":df_.iloc[t][1],
-            "artist" : df_.iloc[t][4],
+            "release_date":release_date,
+            "artist" : df_.iloc[t][5],
             "genre": genre,
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
@@ -139,15 +145,17 @@ def self_cosinesim():
     send = []
     for t in index:
         genre = ", ".join(df_.iloc[t][14].split("'")[1::2])
+        release_date = "Unknown"
+        if str(df_.iloc[t][1]) != "nan":
+            release_date = df_.iloc[t][1]
         curr = {
             "title" : df_.iloc[t][2],
-            "release_date":df_.iloc[t][1],
-            "artist" : df_.iloc[t][4],
+            "release_date":release_date,
+            "artist" : df_.iloc[t][5],
             "genre": genre,
             "spotify_link" : df_.iloc[t][11],
             "lyric": df_.iloc[t][30]
         }
-        send.append(curr)
     return jsonpickle.encode(send), 200
 
 
