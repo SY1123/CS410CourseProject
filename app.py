@@ -55,7 +55,7 @@ userRecords = ""
 def index():
     global userRecords
     if len(userRecords) == 0:
-        return jsonpickle.encode({"[]"})
+        return jsonpickle.encode([])
     print("userRecords",userRecords)
     userRecords =  ' '.join(w for w in re.split(r"\W", userRecords) if w)
     text_tokens = word_tokenize(userRecords)
