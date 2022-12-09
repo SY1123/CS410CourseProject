@@ -8,7 +8,7 @@ import re
 import numpy as np
 from rank_bm25 import BM25Okapi
 from recom_song import*
-# from prefit_search import*
+from prefit_search import*
 from NLPSearch import*
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import sentiment_search as ss
@@ -81,7 +81,7 @@ def index():
             "lyric": df_.iloc[t][30]
         }
         send.append(curr)
-    return jsonpickle.encode(send),200
+    return jsonpickle.encode(send)
 
 
 #http://127.0.0.1:5000/KNNrecom?keyword=They-re-rotting-my-brain
