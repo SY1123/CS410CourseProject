@@ -1,4 +1,8 @@
-# CourseProject
+# SmartSearch
+
+## 📹 Link to Video
+
+https://www.youtube.com/watch?v=DdyypZzc4UA&ab_channel=YingSun
 
 ## 💻 Overview
 
@@ -236,6 +240,7 @@ flask run
 
 
 ## Contributors
+**Each team member made an equal contribution to this project.**
 
 |     Name      |          NetId          |   
 |:-------------:|:-----------------------:|
