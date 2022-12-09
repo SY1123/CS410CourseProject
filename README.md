@@ -2,13 +2,15 @@
 
 ## 💻 Overview
 
-Since spotify doesn’t support lyrics based songs searching, one of our website platform focuses is to help users search songs by inputting lyrics.  A common situation we often encounter is hearing a song from somewhere and thinking it sounds good, but only remembering a few lines of lyrics. However, mainstream listening platforms do not have specific adaptations for searching songs based on lyrics, so we often encounter cases where we cannot search for the song. Therefore, this is one of the motivation of our project.
+Since spotify doesn’t support lyrics based songs searching, one of our website platform focuses is to help users search songs by inputting lyrics.  A common situation we often encounter is hearing a song from somewhere and thinking it sounds good, but only remembering a few lines of lyrics. However, mainstream listening platforms do not have specific adaptations for searching songs based on lyrics, so we often encounter cases where we cannot search for the song. Therefore, this is one of the motivations of our project. And the other
+feature of our project is that user can search songs based on their mood, which is achieved by sentiment analysis.
 Our project is a web search platform with front-end based on React frame and back-end based on Flask. The main functionality of our search platform has three parts:
 
-1. Given a lyrics query [any length], fast-return only the top matched entire lyrics based on that query(for the purpose of wanting the whole lyrics only not detail information about the song)
-2. Given a lyrics query [any length], quick-return the top matched songs and return detail information about the song based on [cosine_similarity]
-3. After user searches on the platform, the recommendation page will list out similar songs based on the search history
-4. Given a keyword [stands for a mood] query, return the top 6 songs that match the sentiment expressed in the query.
+1. Given a lyrics query [any length], quick-return the top matched songs and return detail information about the song based on [cosine_similarity]
+
+2. After user searches on the platform, the recommendation page will list out similar songs based on the search history
+
+3. Given a keyword [stands for a mood] query, return the top 6 songs that match the sentiment expressed in the query.
 
 
 ## 🔧 Work Covers
@@ -74,7 +76,6 @@ We first used pandas to read csv file into a dataframe. Then remove some rows co
                 To calculate which song is more popular, I use a formula to calculate it by weeks and ranks. This can be used to recommend songs by default.
 		
 - Lyrics based search algorithms
-  - bm25 Integrated algorithm will be called when a user only wants to know the entire lyrics from a fragment. (Most quick one) Output only the matched lyrics of that song 
   - cosine similarity algorithm generates the top ranked songs based on the query metrics and dataset metrics. Output all the detailed information about the song.
 
 - sentiment based search algorithms
