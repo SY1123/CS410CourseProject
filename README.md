@@ -197,15 +197,28 @@ git clone https://github.com/SY1123/CS410CourseProject
 
 If you don't have node.js and npm, then install it from the website(https://nodejs.org/en/):
 
-Then, to install all dependencies, run:
+Then, to install all dependencies for the front end, run:
 
 ```shell
+cd  front410
 npm install
 ```
 
-Next, install python dependencies:
+To start the front end , run:
 
 ```shell
+npm run dev
+```
+
+Next, install python dependencies for back end:
+
+```shell
+cd ..
+pip install numpy
+pip install re
+pip install jsonpickle
+pip install nltk
+pip intall pandas
 pip install -u flask-cors
 pip install flask
 pip install scikit-surprise
@@ -220,11 +233,7 @@ This could be slow because it is pre-fitting the model on a pretty large dataset
 flask run
 ```
 
-To start the development server, run:
 
-```shell
-npm run dev
-```
 
 The project does not support static build. To create an optimized production build, run:
 
