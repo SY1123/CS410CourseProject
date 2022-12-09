@@ -217,6 +217,7 @@ python -m spacy download en_core_web_sm
 ```
 
 To start backend server, run: 
+This could be slow because it is pre-fitting the model on a pretty large dataset
 
 ```shell
 flask run
@@ -251,3 +252,4 @@ next
 | Yuteng Zhuang |        yutengz2         | 
 |  Qinhan Xia   |        qinhanx2         |
 
+ 
