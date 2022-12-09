@@ -235,15 +235,6 @@ flask run
 
 
 
-The project does not support static build. To create an optimized production build, run:
-
-```shell
-npm run build
-```
-
-
-
-
 ## Contributors
 
 |     Name      |          NetId          |   
