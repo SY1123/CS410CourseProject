@@ -194,11 +194,7 @@ First, clone the source code from GitHub
 git clone https://github.com/SY1123/CS410CourseProject
 ```
 
-If you don't have npm, run:
-
-```shell
-npm install -g npm
-```
+If you don't have node.js and npm, then install it from the website(https://nodejs.org/en/):
 
 Then, to install all dependencies, run:
 
