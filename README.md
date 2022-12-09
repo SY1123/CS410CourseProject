@@ -241,17 +241,12 @@ The project does not support static build. To create an optimized production bui
 npm run build
 ```
 
-Then run the following command to start the production server:
-
-```shell
-next
-```
 
 
 
 ## Contributors
 
-|     Name      |           UIN           |   
+|     Name      |          NetId          |   
 |:-------------:|:-----------------------:|
 |   Ying Sun    | yingsun3 (Team Captain) | 
 |   Chang Li    |        changli8         |
