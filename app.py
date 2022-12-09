@@ -181,6 +181,7 @@ def self_cosinesim():
             "lyric": df_.iloc[t][30]
         }
         send.append(curr)
+    send = list(reversed(send))
     return jsonpickle.encode(send), 200
 
 
