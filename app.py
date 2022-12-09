@@ -7,7 +7,7 @@ import pandas as pd
 import re
 import numpy as np
 from rank_bm25 import BM25Okapi
-from recom_song import*
+# from recom_song import*
 from prefit_search import*
 from NLPSearch import*
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
@@ -16,7 +16,7 @@ import nltk.data
 import nltk
 import re
 from nltk.corpus import stopwords
-
+import csv
 from nltk.tokenize import word_tokenize
 
 
@@ -24,7 +24,7 @@ from nltk.tokenize import word_tokenize
 app = Flask(__name__)
 CORS(app)
 lemmatizer = WordNetLemmatizer()
-df = pd.read_csv("songs.csv", encoding='unicode_escape',sep=",")
+df = csv.reader("songs.csv", encoding='unicode_escape',sep=",")
 
 df_ = df[df.lyrics != 'Error: Could not find lyrics.']
 df_ = df_[df_['lyrics'].notna()]
