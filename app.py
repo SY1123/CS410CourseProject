@@ -16,7 +16,7 @@ import nltk.data
 import nltk
 import re
 from nltk.corpus import stopwords
-import csv
+
 from nltk.tokenize import word_tokenize
 
 
@@ -24,7 +24,7 @@ from nltk.tokenize import word_tokenize
 app = Flask(__name__)
 CORS(app)
 lemmatizer = WordNetLemmatizer()
-df = csv.reader("songs.csv", encoding='unicode_escape',sep=",")
+df = pd.read_csv("songs.csv", encoding='unicode_escape',sep=",")
 
 df_ = df[df.lyrics != 'Error: Could not find lyrics.']
 df_ = df_[df_['lyrics'].notna()]
@@ -72,13 +72,15 @@ def index():
             release_date = str(df_.iloc[t][1])
         if str(df_.iloc[t][5]) != "nan":
             artist = str(df_.iloc[t][5])
+        tmp = df_.iloc[t][30]
+        lyric = tmp.replace('\n', '.')
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":release_date,
             "artist" : artist,
             "genre": genre,
             "spotify_link" : df_.iloc[t][11],
-            "lyric": df_.iloc[t][30]
+            "lyric": lyric
         }
         send.append(curr)
     return jsonpickle.encode(send)
@@ -124,14 +126,15 @@ def prefit_qsearch():
             release_date = str(df_.iloc[t][1])
         if str(df_.iloc[t][5]) != "nan":
             artist = str(df_.iloc[t][5])
-        print("release_date",release_date)
+        tmp = df_.iloc[t][30]
+        lyric = tmp.replace('\n', '.')
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":release_date,
             "artist" : artist,
             "genre": genre,
             "spotify_link" : df_.iloc[t][11],
-            "lyric": df_.iloc[t][30]
+            "lyric": lyric
         }
         send.append(curr)
     return jsonpickle.encode(send),200
@@ -172,13 +175,15 @@ def self_cosinesim():
             release_date = str(df_.iloc[t][1])
         if str(df_.iloc[t][5]) != "nan":
             artist = str(df_.iloc[t][5])
+        tmp = df_.iloc[t][30]
+        lyric = tmp.replace('\n', '.')
         curr = {
             "title" : df_.iloc[t][2],
             "release_date":release_date,
             "artist" : artist,
             "genre": genre,
             "spotify_link" : df_.iloc[t][11],
-            "lyric": df_.iloc[t][30]
+            "lyric": lyric
         }
         send.append(curr)
     send = list(reversed(send))
