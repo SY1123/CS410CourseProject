@@ -29,8 +29,8 @@ def spacy_tokenizer(doc):
 #Vectorized for pre fit model save time in search
 #TfidfVectorizer.
 vectorizer = TfidfVectorizer(tokenizer=spacy_tokenizer)
-print(type(vectorizer))
-# features = vectorizer.fit_transform(llyrics)
+# print(type(vectorizer))
+features = vectorizer.fit_transform(llyrics)
 # with open('saved-model.pkl',"wb") as file:
 #   pickle.dump(features, file)
 # with open('saved-vector.pkl',"wb") as file:
@@ -40,11 +40,11 @@ def top_k(arr, k):
   kth_largest = (k + 1) * -1
   return np.argsort(arr)[:kth_largest:-1]
 
-with open("saved-model.pkl","rb")as file:
-  features = pickle.load(file)
+# with open("saved-model.pkl","rb")as file:
+#   features = pickle.load(file)
   
-with open("saved-vector.pkl","rb")as file:
-  vectorizer = pickle.load(file)
+# with open("saved-vector.pkl","rb")as file:
+#   vectorizer = pickle.load(file)
   
 def prefit_rank(query, top):
   query_tfidf = vectorizer.transform([query])
